@@ -9,6 +9,6 @@ module.exports = {
       directory: './db/migrations'
     },
     useNullAsDefault: true
-  }
+  },
 
 };

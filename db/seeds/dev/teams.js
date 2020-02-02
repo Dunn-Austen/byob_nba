@@ -4,7 +4,7 @@ const createTeam = async (knex, team) => {
   const teamId = await knex('teams').insert({
     franchise: team.franchise,
     playoff_series: team.Plyfs,
-    champsionships: team.champ
+    championships: team.champ
   }, 'id');
 
   let championPromises = team.champions.map(champion => {

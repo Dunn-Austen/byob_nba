@@ -12,9 +12,9 @@ const createTeam = async (knex, team) => {
     return createChampion(knex, {
       champion: champion.Franchise,
       year: champion.Year,
-      opponent: champion.runner_up,
+      opponent: champion.Runner_up,
       team_id: teamId[0]
-    })
+    });
   });
 
   return Promise.all(championPromises);
@@ -30,7 +30,8 @@ exports.seed = async (knex) => {
     await knex('champions').del();
     //Deletes the data in the table
 
-    let teamPromises = teamsData.map(team => {
+    let teamPromises = teams.map(team => {
+      console.log(team);
       return createTeam(knex, team);
     });
 

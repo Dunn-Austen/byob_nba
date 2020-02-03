@@ -49,7 +49,7 @@ app.get('/api/v1/teams', async (request, response) => {
 app.get('/api/v1/teams/:id', async (request, response) => {
   try {
     //Includes the promise resolution in the case of a successful fetch request
-    const teams = await database('teams').where('id', request.params.id).select();
+    const team = await database('teams').where('id', request.params.id).select();
     //This code is largely the same as above, with the exception of the WHERE statement
     //The where clause above translates to SELECT data from the TEAMS table WHERE the ID MATCHES the ID on the params objects of the request (the id of the team central to the get request)
     if (team.length) {
@@ -70,53 +70,79 @@ app.get('/api/v1/teams/:id', async (request, response) => {
   }
 });
 
-//This route governs the behavior responding to a GET request for an individual team's data
+//This route governs the behavior responding to a GET request for all  nba champion data
 app.get('/api/v1/champions', async (request, response) => {
   try {
+    //Assuming no error, the following code dictates the promise resolution
+    //Initializes the variable, teams, with data from the champions table (the select call resolves to an array of objects from the database)
     const champions = await database('champions').select();
+        //The 200 status indicates a successful get request, and gives a response object that amounts to the parsed data from the teams database
     response.status(200).json({champions});
   } catch (error) {
+        //Gives back a 500 status, with parsed text explaining that a 500 code corresponds to an internal server error
     response.status(500).json({error: 'internal server error' })
   }
 });
 
+//This route governs the behavior responding to a GET request for an individual team's data
+//Same instance(app)/method(get)/path(/api/v1/teams/id:)/handler format as the above endpoint
+//The :id refers to an identifier included in the table creation for the teams data, and allows us to pinpoint particular objects from the data set
 app.get('/api/v1/champions/:id', async (request, response) => {
+      //Includes the promise resolution in the case of a successful fetch request
   try {
-    const teams = await database('champions').where('id', request.params.id).select();
+      //Initializes the variable, chmapion, with data from the teams table (the select call combined with the where clause resolves to a specifc row & column, assuming successful ID matching)
+    const champion = await database('champions').where('id', request.params.id).select();
     if (champion.length) {
+      //The conditional here runs the logic/promise resolution below if TRUE (length = 0 is falsey, so there must be a length > 0)
       response.status(200).json({champion});
+      //The 200 status indicates a successful get request, and gives a response object that amounts to the JSONed data champion variable
 
     } else {
+              //If the if condition resolves to false, we give an error status of 404 (resource not found), with some text explaining the specific missing element
       response.status(404).json({
         error: `Could not find champion with id ${request.params.id}`
       });
     }
   } catch (error) {
+    //Catch block runs the below code if an error is caught in the try statement
+    //Gives back a 500 status, with parsed text explaining that a 500 code corresponds to an internal server error
     response.status(500).json({error: 'internal server error' })
   }
 });
 
+//Express route, this time for a POST method (path, handler, app instance are all as referenced above) - Posting a new NBA team
 app.post('/api/v1/teams', async (request, response) => {
   const team = request.body;
+  //The team variable here is initialized with the VALUE ENTERED BY THE USER INTO HIS OR HER POST REQUEST
 
   for (let requiredParameter of ['franchise', 'playoff_series', 'championships']) {
+    //This loop includes the precise properties to be included in a successful POST request
     if(!team[requiredParameter]) {
+      //Conditional statement involving bracket notation validating the request body's structure
       return response
+      //Returns the response with an HTTP Status code 422 - corresponding to inappropriate formatting. This line of code gives back specific information on the necessary data structure as well as the precise transgression (descriptive error handling)
         .status(422).send({ error: `Expected object structure: { name: <String>, city: <String>, championships: <String>  }. You're missing a "${requiredParameter}" property.` })
     }
   }
 
   try {
+    //Refers to happy path for the promise resolution
     const id = await database('teams').insert(team, 'id');
+    //After passing the structural validation above, as well as having no errors in the execution of the try statement, this line of code serves to INSERT / POST the client's fetch data into the specific table
+      //HTTP Status code 201 corresponds to a successful creation or 'posting' of data
     response.status(201).json({ id: id[0] });
   } catch (error) {
+    //Sad path response, details are explained in identical code above
     response.status(500).json({ error: 'internal server error'  });
   }
 });
 
+//Express route for handling POST request (new Nba champ datum)
+//The code explanation for this block below matches identically that annotations for the block above
 app.post('/api/v1/champions', async (request, response) => {
   const champion = request.body;
 
+  //See above code block annotaitons
   for (let requiredParameter of ['champion', 'year', 'opponent']) {
     if(!champion[requiredParameter]) {
       return response
@@ -125,6 +151,7 @@ app.post('/api/v1/champions', async (request, response) => {
   }
 
   try {
+    //See above listed code
     const id = await database('champions').insert(champion, 'id');
     response.status(201).json({ id: id[0] });
   } catch (error) {
@@ -132,18 +159,22 @@ app.post('/api/v1/champions', async (request, response) => {
   }
 });
 
+//Express route for handling a DELETE request (delete a specific Nba team)
 app.delete('/api/v1/teams/:id', async (request, response) => {
-  const { id } = request.params;
+  //See above code regarding try/catch statements
   try {
-    const team = await database('teams').where('id', id).del();
-
+    const team = await database('teams').where('id', 'id', request.params.id).del();
+    //Finds precisely the right table cell (via WHERE clause MATCHING (id))
+    // And then uses the del() method to remove/delete the targeted datum
     response.sendStatus(204).json({msg: 'Successful delete'});
+    //Gives a 204 status which corresponds to emptied content (successful delete)
   } catch (error) {
+    //See above code regarding HTTP status code 500
     response.status(500).json({ error: 'internal server error'  });
   }
 });
 
 app.listen(app.get('port'), () => {
+  //Generates a message indicating that the port is indeed running (via the listen() method which runs when the app is fired)
   console.log(`${app.locals.title} is running on http://localhost:${app.get('port')}.`);
 });
-//Generates a message indicating that the port is indeed running

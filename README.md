@@ -29,7 +29,7 @@ NBA team data was downloaded from https://www.basketball-reference.com/ and refo
 
 ---
 
-**GET all Teams**
+**GET all Teams**   <br/>
 Path:
 ```
 /api/v1/teams
@@ -52,7 +52,7 @@ Sample Data:
 ```
 
 
-**GET all Champions**
+**GET all Champions** <br/>
   Path:
 ```
 /api/v1/champions
@@ -75,7 +75,7 @@ Sample Data:
 ]
 ```
 
-**GET one Team**
+**GET one Team** <br/>
   Path:
 ```
 /api/v1/teams/:id
@@ -109,7 +109,7 @@ Sample Data:
 ]
 ```
 
-**POST an NBA Team**
+**POST an NBA Team** <br/>
   Path:
 ```
 /api/v1/teams
@@ -125,7 +125,7 @@ Sample Data:
 { id: 3 }
 ```
 
-**POST an NBA Champion**
+**POST an NBA Champion** <br/>
   Path:
 ```
 /api/v1/champions
@@ -142,7 +142,7 @@ Sample Data:
 ```
 
 
-**DELETE an NBA Team**
+**DELETE an NBA Team** <br/>
   Path:
 ```
 /api/v1/teams

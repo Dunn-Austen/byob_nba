@@ -29,6 +29,129 @@ NBA team data was downloaded from https://www.basketball-reference.com/ and refo
 
 ---
 
+**GET all Teams**
+Path:
+```
+/api/v1/teams
+```
+
+Sample Data:
+```
+[
+  {
+    franchise: "Atlanta Hawks",
+    playoff_series: 46,
+    championships: 1
+  },
+  {
+    franchise: "Boston Celtics",
+    playoff_series: 56,
+    championships: 17
+  }
+]
+```
+
+
+**GET all Champions**
+Path:
+```
+/api/v1/champions
+```
+Sample Data:
+```
+[
+  {
+    champion: "Detroit Pistons",
+    Year: 2004,
+    opponent: "Los Angeles Lakers",
+    team_id: 1
+  },
+  {
+    champion: "San Antonio Spurs",
+    Year: 2003,
+    opponent: "New Jersey Nets",
+    team_id: 2
+  }
+]
+```
+
+**GET one Team**
+Path:
+```
+/api/v1/teams/:id
+```
+
+Sample Data:
+```
+[
+  {
+    franchise: "Atlanta Hawks",
+    playoff_series: 46,
+    championships: 1
+  }
+]
+```
+
+**GET one Champion**
+Path:
+```
+/api/v1/champions/:id
+```
+Sample Data:
+```
+[
+  {
+    champion: "San Antonio Spurs",
+    Year: 2003,
+    opponent: "New Jersey Nets",
+    team_id: 2
+  }
+]
+```
+
+**POST an NBA Team**
+Path:
+```
+/api/v1/teams
+```
+
+Sample Request Body Format:
+```
+ {franchise: 'Las Vegas Vegans', playoff_series: 10, championships: 4,235}
+```
+
+Expected Response (Success): 
+```
+{ id: 3 }
+```
+
+**POST an NBA Champion**
+Path:
+```
+/api/v1/champions
+```
+
+Sample Request Body Format:
+```
+   {champion: "San Antonio Spurs", Year: 2023, opponent: "New Jersey Nets"}
+```
+
+Expected Response (Success): 
+```
+{ id: 3 }
+```
+
+
+**DELETE an NBA Team**
+Path:
+```
+/api/v1/teams
+```
+
+Expected Response (Success): 
+```
+{msg: 'Successful delete'}
+```
 
 **Project Management Board**
 - https://github.com/Dunn-Austen/byob_nba/projects/1

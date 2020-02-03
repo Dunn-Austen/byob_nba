@@ -14,7 +14,7 @@ exports.up = function(knex) {
     table.string('opponent');
     table.integer('team_id').unsigned();
     //Unsigned means no (-) attached, no negative numbers
-    table.foreign('team_id').references('team.id');
+    table.foreign('team_id').references('teams.id');
     //Makes this a foreign key referencing the primary key on the other table
   })
 };

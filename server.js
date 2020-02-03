@@ -70,7 +70,7 @@ app.post('/api/v1/teams', async (request, response) => {
   for (let requiredParameter of ['franchise', 'playoff_series', 'championships']) {
     if(!team[requiredParameter]) {
       return response
-        .status(422).send({ error: `Expected object structure: { name: <String>, city: <String>, championships: <String>  }. You're missing a "${requiredParameter}" property.` })
+        .status(422).send({ error: `Expected object structure: { franchise: <String>, playoff_series: <String>, championships: <String>  }. You're missing a "${requiredParameter}" property.` })
     }
   }
 

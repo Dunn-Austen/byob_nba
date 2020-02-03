@@ -23,6 +23,9 @@ NBA team data was downloaded from https://www.basketball-reference.com/ and refo
 | GET (one team)     | /teams/:id      |   N/A  |
 | GET (all champions) | /champions      |    N/A  |
 | GET (one champion) | /champions/:id      |    N/A  |
-| POST (new team) | /teams      |   {'franchise': 'Las Vegas Vegans, 'playoff_series': 10, 'championships': 4,235} |
-| POST (new champion) | /champions      |    {'champion': 'Las Vegas Vegans, 'year': 2021, 'opponent': 'Los Angeles Lakers'} |
+| POST (new team) | /teams      |   {franchise: 'Las Vegas Vegans', playoff_series: 10, championships: 4,235} |
+| POST (new champion) | /champions      |    {champion: 'Las Vegas Vegans', year: 2021, opponent: 'Los Angeles Lakers'} |
 | DELETE (team) | /teams      |    N/A |
+
+---
+

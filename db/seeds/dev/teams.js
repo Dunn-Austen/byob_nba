@@ -3,14 +3,16 @@ const championsData = require('../../../teamsData');
 
 const createTeam = async (knex, team) => {
   const teamId = await knex('teams').insert({
-    franchise: team.franchise,
+    franchise: team.Franchise,
     playoff_series: team.Plyfs,
     championships: team.champ
   }, 'id');
 
-  let championPromises = team.champions.map(champion => {
+  let championPromises = championsData.map(champion => {
     return createChampion(knex, {
-      champ: champion,
+      champion: champion.Franchise,
+      year: champion.Year,
+      opponent: champion.runner_up,
       team_id: teamId[0]
     })
   });

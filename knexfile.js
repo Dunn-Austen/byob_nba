@@ -23,7 +23,10 @@ module.exports = {
       directory: './db/seeds/dev'
     },
     useNullAsDefault: true,
-    rejectUnauthorized: false
-  }
+  },
+  
+  ssl: {
+    rejectUnauthorized: false,
+},
 
 };

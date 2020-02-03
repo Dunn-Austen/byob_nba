@@ -11,7 +11,7 @@ exports.up = function(knex) {
     table.increments('id').primary();
     table.string('champion');
     table.integer('year');
-    table.integer('opponent');
+    table.string('opponent');
     table.integer('team_id').unsigned();
     //Unsigned means no (-) attached, no negative numbers
     table.foreign('team_id').references('teams.id');

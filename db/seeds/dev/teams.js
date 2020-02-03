@@ -1,5 +1,5 @@
 const teamsData = require('../../../teamsData');
-const championsData = require('../../../teamsData');
+const championsData = require('../../../championsData');
 
 const createTeam = async (knex, team) => {
   const teamId = await knex('teams').insert({
@@ -30,7 +30,7 @@ exports.seed = async (knex) => {
     await knex('champions').del();
     //Deletes the data in the table
 
-    let teamPromises = teams.map(team => {
+    let teamPromises = teamsData.map(team => {
       console.log(team);
       return createTeam(knex, team);
     });

@@ -2,9 +2,9 @@ exports.up = function(knex) {
   return knex.schema
   .createTable('teams', table => {
     table.increments('id').primary();
-    table.string('team');
-    table.string('city');
-    table.string('total championships');
+    table.string('franchise');
+    table.integer('playoff_series');
+    table.integer('championships');
     table.timestamps(true, true);
   })
   .createTable('champions', table => {

@@ -51,20 +51,26 @@ app.get('/api/v1/teams/:id', async (request, response) => {
     //Includes the promise resolution in the case of a successful fetch request
     const teams = await database('teams').where('id', request.params.id).select();
     //This code is largely the same as above, with the exception of the WHERE statement
-    //
+    //The where clause above translates to SELECT data from the TEAMS table WHERE the ID MATCHES the ID on the params objects of the request (the id of the team central to the get request)
     if (team.length) {
+      //The conditional here runs the logic/promise resolution below if TRUE (length = 0 is falsey, so there must be a length > 0)
       response.status(200).json({team});
+      //The 200 status indicates a successful get request, and gives a response object that amounts to the JSONed data from the teams database
 
     } else {
       response.status(404).json({
+        //If the if condition resolves to false, we give an error status of 404 (resource not found), with some text explaining the specific missing element
         error: `Could not find team with id ${request.params.id}`
       });
     }
   } catch (error) {
+    //Catch block runs the below code if an error is caught in the try statement
+    //Gives back a 500 status, with parsed text explaining that a 500 code corresponds to an internal server error
     response.status(500).json({error: 'internal server error' })
   }
 });
 
+//This route governs the behavior responding to a GET request for an individual team's data
 app.get('/api/v1/champions', async (request, response) => {
   try {
     const champions = await database('champions').select();

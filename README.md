@@ -92,7 +92,7 @@ Sample Data:
 ]
 ```
 
-**GET one Champion**
+**GET one Champion** <br/>
   Path:
 ```
 /api/v1/champions/:id

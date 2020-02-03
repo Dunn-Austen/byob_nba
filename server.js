@@ -42,7 +42,7 @@ app.get('/api/v1/teams/:id', async (request, response) => {
 //Get endpoint for all champions
 app.get('/api/v1/champions', async (request, response) => {
   try {
-    const champions = await database('teams').select();
+    const champions = await database('champions').select();
     response.status(200).json({champions});
   } catch (error) {
     response.status(500).json({error: 'internal server error' })
@@ -87,7 +87,6 @@ app.post('/api/v1/teams', async (request, response) => {
 });
 
 //Posting a new champion
-//Needs file path amendment re: connected tables (teams -> champions)
 app.post('/api/v1/champions', async (request, response) => {
   const champion = request.body;
 
@@ -99,7 +98,7 @@ app.post('/api/v1/champions', async (request, response) => {
   }
 
   try {
-    const id = await database('teams').insert(champion, 'id');
+    const id = await database('champions').insert(champion, 'id');
     response.status(201).json({ id: id[0] });
   } catch (error) {
     response.status(500).json({ error: 'internal server error' });

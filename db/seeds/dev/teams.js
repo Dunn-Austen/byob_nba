@@ -31,7 +31,6 @@ exports.seed = async (knex) => {
     //Deletes the data in the table
 
     let teamPromises = teamsData.map(team => {
-      console.log(team);
       return createTeam(knex, team);
     });
 

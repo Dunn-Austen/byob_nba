@@ -1,6 +1,6 @@
 exports.up = function(knex) {
   return knex.schema
-  .createTable('teams', function (table) {
+  .createTable('teams', table => {
     table.increments('id').primary();
     table.string('team');
     table.string('city');
@@ -10,8 +10,8 @@ exports.up = function(knex) {
   .createTable('champions', table => {
     table.increments('id').primary();
     table.string('champion');
-    table.string('year');
-    table.string('opponent');
+    table.integer('year');
+    table.integer('opponent');
     table.integer('team_id').unsigned();
     //Unsigned means no (-) attached, no negative numbers
     table.foreign('team_id').references('teams.id');

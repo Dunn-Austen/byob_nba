@@ -22,7 +22,7 @@ const createChampion = (knex, champion) => {
   return knex('champions').insert(champion);
 };
 
-exports.seed = async function(knex) {
+exports.seed = async (knex) => {
   try {
     await knex('teams').del();
     await knex('champions').del();

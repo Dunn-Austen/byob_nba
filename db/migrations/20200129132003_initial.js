@@ -13,14 +13,11 @@ exports.up = function(knex) {
     table.integer('year');
     table.string('opponent');
     table.integer('team_id').unsigned();
-    //Unsigned means no (-) attached, no negative numbers
     table.foreign('team_id').references('teams.id');
-    //Makes this a foreign key referencing the primary key on the other table
   })
 };
 
 exports.down = function(knex) {
-  //In removing the tables, the attached table is first removed, then the anchor
   return knex.schema
     .dropTable('champions')
     .dropTable('teams')

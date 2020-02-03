@@ -163,7 +163,7 @@ app.post('/api/v1/champions', async (request, response) => {
 app.delete('/api/v1/teams/:id', async (request, response) => {
   //See above code regarding try/catch statements
   try {
-    const team = await database('teams').where('id', 'id', request.params.id).del();
+    const team = await database('teams').where('id', request.params.id).del();
     //Finds precisely the right table cell (via WHERE clause MATCHING (id))
     // And then uses the del() method to remove/delete the targeted datum
     response.sendStatus(204).json({msg: 'Successful delete'});

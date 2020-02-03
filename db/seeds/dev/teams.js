@@ -28,15 +28,12 @@ exports.seed = async (knex) => {
   try {
     await knex('teams').del();
     await knex('champions').del();
-    //Deletes the data in the table
 
     let teamPromises = teamsData.map(team => {
       return createTeam(knex, team);
     });
 
     return Promise.all(teamPromises);
-
-    //I need to clarify 'knex' - return (knex)
 
   } catch (error) {
     console.log(`Error sending data: ${error}`);

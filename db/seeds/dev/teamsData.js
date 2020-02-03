@@ -1199,7 +1199,6 @@ let championsData = [
     Franchise: "Minneapolis Lakers",
     Runner_up: "Syracuse Nationals",
     "Top Performers": "G. Mikan (376)",
-    "Top Performers__1": Year,
     "Top Performers__2": "J. Pollard (56)",
     "Top Performers__3": "G. Mikan (3.7)"
   }

@@ -1,5 +1,5 @@
 const teamsData = require('./teamsData');
-const championsData = require('./championsData');
+const championsData = require('./teamsData');
 
 const createTeam = async (knex, team) => {
   const teamId = await knex('teams').insert({

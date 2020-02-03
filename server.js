@@ -25,13 +25,15 @@ app.get('/api/v1/teams', async (request, response) => {
 //Get endpoint for a specific team
 app.get('/api/v1/teams/:id', async (request, response) => {
   try {
-    const { id } = request.params;
-    const teams = await database('teams').select();
-    const team = teams.find(team => team.id === Number(id));
-    if (!team) {
-        return response.sendStatus(404);
+    const teams = await database('teams').where('id', request.params.id).select();
+    if (team.length) {
+      response.status(200).json({team});
+
+    } else {
+      response.status(404).json({
+        error: `Could not find team with id ${request.params.id}`
+      });
     }
-    response.status(200).json({team});
   } catch (error) {
     response.status(500).json({error})
   }
@@ -50,16 +52,16 @@ app.get('/api/v1/champions', async (request, response) => {
 //Get endpoint for a specific champion
 app.get('/api/v1/champions/:id', async (request, response) => {
   try {
-    const { id } = request.params;
-    const champions = await database('teams').select();
-    const champion = champions.find(champion => champion.id === Number(id));
-    if (!team) {
-        return response.sendStatus(404);
+    const teams = await database('champions').where('id', request.params.id).select();
+    if (champion.length) {
+      response.status(200).json({champion});
+
+    } else {
+      response.status(404).json({
+        error: `Could not find champion with id ${request.params.id}`
+      });
     }
-    //200 corresponds to success
-    response.status(200).json({champion});
   } catch (error) {
-    //500 corresponds to internal server error
     response.status(500).json({error})
   }
 });
@@ -89,7 +91,7 @@ app.post('/api/v1/teams', async (request, response) => {
 app.post('/api/v1/champions', async (request, response) => {
   const champion = request.body;
 
-  for (let requiredParameter of ['year', 'champion', 'runner_up']) {
+  for (let requiredParameter of ['champion', 'year', 'opponent']) {
     if(!champion[requiredParameter]) {
       return response
         .status(422).send({ error: `Expected object structure: { name: <String>, city: <String>, championships: <String>  }. You're missing a "${requiredParameter}" property.` })
@@ -104,22 +106,17 @@ app.post('/api/v1/champions', async (request, response) => {
   }
 });
 
-//Delete endpoint needs work
-// app.delete('/api/v1/teams/:id', async (request, response) => {
-//   const { id } = request.params;
-//   try {
-//     const team = await database('teams').where('id', id).del();
-//
-//     if (!team) {
-//       return response.sendStatus(404)
-//     }
-//
-//     response.sendStatus(204)
-//   } catch (error) {
-//     response.status(500).json({ error });
-//
-//   }
-// })
+//Delete an NBA team
+app.delete('/api/v1/teams/:id', async (request, response) => {
+  const { id } = request.params;
+  try {
+    const team = await database('teams').where('id', id).del();
+
+    response.sendStatus(204).json({msg: 'Successful delete'});
+  } catch (error) {
+    response.status(500).json({ error });
+  }
+});
 
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on http://localhost:${app.get('port')}.`);

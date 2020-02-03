@@ -18,7 +18,7 @@ app.get('/api/v1/teams', async (request, response) => {
     const teams = await database('teams').select();
     response.status(200).json({teams});
   } catch (error) {
-    response.status(500).json({error})
+    response.status(500).json({error: 'internal server error' })
   }
 });
 
@@ -35,7 +35,7 @@ app.get('/api/v1/teams/:id', async (request, response) => {
       });
     }
   } catch (error) {
-    response.status(500).json({error})
+    response.status(500).json({error: 'internal server error' })
   }
 });
 
@@ -45,7 +45,7 @@ app.get('/api/v1/champions', async (request, response) => {
     const champions = await database('teams').select();
     response.status(200).json({champions});
   } catch (error) {
-    response.status(500).json({error})
+    response.status(500).json({error: 'internal server error' })
   }
 });
 
@@ -62,7 +62,7 @@ app.get('/api/v1/champions/:id', async (request, response) => {
       });
     }
   } catch (error) {
-    response.status(500).json({error})
+    response.status(500).json({error: 'internal server error' })
   }
 });
 
@@ -82,7 +82,7 @@ app.post('/api/v1/teams', async (request, response) => {
     const id = await database('teams').insert(team, 'id');
     response.status(201).json({ id: id[0] });
   } catch (error) {
-    response.status(500).json({ error });
+    response.status(500).json({ error: 'internal server error'  });
   }
 });
 
@@ -102,7 +102,7 @@ app.post('/api/v1/champions', async (request, response) => {
     const id = await database('teams').insert(champion, 'id');
     response.status(201).json({ id: id[0] });
   } catch (error) {
-    response.status(500).json({ error });
+    response.status(500).json({ error: 'internal server error' });
   }
 });
 
@@ -114,7 +114,7 @@ app.delete('/api/v1/teams/:id', async (request, response) => {
 
     response.sendStatus(204).json({msg: 'Successful delete'});
   } catch (error) {
-    response.status(500).json({ error });
+    response.status(500).json({ error: 'internal server error'  });
   }
 });
 

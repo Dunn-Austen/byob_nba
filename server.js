@@ -19,9 +19,11 @@ app.locals.title = 'BYOB_NBA';
 
 
 app.get('/', (request, response) => {
+//This express route refers to the instace of our express app handling a get request (method) to the '/'  (the first argument). The 2nd argument is a callback that handles the logic governing the reaction to the get request
   response.send('Welcome to the BYOB_NBA page');
+//Line 23 returns a reponse with the specified text
 });
-//Just a little something to greet me when running the server. It's the endpoint dictating responses for the (/) home pathway
+
 
 app.get('/api/v1/teams', async (request, response) => {
   try {

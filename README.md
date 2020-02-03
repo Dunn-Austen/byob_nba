@@ -53,11 +53,11 @@ Sample Data:
 
 
 **GET all Champions**
-Path:
+  Path:
 ```
 /api/v1/champions
 ```
-Sample Data:
+  Sample Data:
 ```
 [
   {
@@ -76,12 +76,12 @@ Sample Data:
 ```
 
 **GET one Team**
-Path:
+  Path:
 ```
 /api/v1/teams/:id
 ```
 
-Sample Data:
+  Sample Data:
 ```
 [
   {
@@ -93,11 +93,11 @@ Sample Data:
 ```
 
 **GET one Champion**
-Path:
+  Path:
 ```
 /api/v1/champions/:id
 ```
-Sample Data:
+  Sample Data:
 ```
 [
   {
@@ -110,45 +110,45 @@ Sample Data:
 ```
 
 **POST an NBA Team**
-Path:
+  Path:
 ```
 /api/v1/teams
 ```
 
-Sample Request Body Format:
+  Sample Request Body Format:
 ```
  {franchise: 'Las Vegas Vegans', playoff_series: 10, championships: 4,235}
 ```
 
-Expected Response (Success): 
+  Expected Response (Success): 
 ```
 { id: 3 }
 ```
 
 **POST an NBA Champion**
-Path:
+  Path:
 ```
 /api/v1/champions
 ```
 
-Sample Request Body Format:
+  Sample Request Body Format:
 ```
    {champion: "San Antonio Spurs", Year: 2023, opponent: "New Jersey Nets"}
 ```
 
-Expected Response (Success): 
+  Expected Response (Success): 
 ```
 { id: 3 }
 ```
 
 
 **DELETE an NBA Team**
-Path:
+  Path:
 ```
 /api/v1/teams
 ```
 
-Expected Response (Success): 
+  Expected Response (Success): 
 ```
 {msg: 'Successful delete'}
 ```

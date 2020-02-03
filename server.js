@@ -1,18 +1,27 @@
+//Import syntax that allows us to use the express framework (configuration element)
 const express = require('express');
+//Initializes a variable of 'app' with the express invocation. Allows us to run express by referencing 'app'
 const app = express();
+//Establishes the present environment (development, testing, or production) with the default setting of a development environment
 const environment = process.env.NODE_ENV || 'development';
+//Per the specific environment, fetches the database configuration from knexfile.js so that express can access it
 const configuration = require('./knexfile')[environment];
+//Import syntax for knex (configuration element)
 const database = require('knex')(configuration);
 
+//By default, parses the request body to json format
 app.use(express.json());
 
+//Dictates the port on which the server runs (specifying 3000 as the default)
 app.set('port', process.env.PORT || 3000);
+//The locals object is somewhat akin to local storage - a sometimes convenient means for caching information. Here we're just storing the title
 app.locals.title = 'BYOB_NBA';
 
 
 app.get('/', (request, response) => {
   response.send('Welcome to the BYOB_NBA page');
 });
+//Just a little something to greet me when running the server. It's the endpoint dictating responses for the (/) home pathway
 
 app.get('/api/v1/teams', async (request, response) => {
   try {
@@ -22,6 +31,8 @@ app.get('/api/v1/teams', async (request, response) => {
     response.status(500).json({error: 'internal server error' })
   }
 });
+//This is the GET request enpoint for all team data. The code block suffices to specify what to do when encountering a particular fetch call (determines happy & sad paths and targeted responses)
+//Each of the remaining code blocks represents the programmed logic for receiving and processing various fetch calls, be they successful or some other condition
 
 app.get('/api/v1/teams/:id', async (request, response) => {
   try {
@@ -114,3 +125,4 @@ app.delete('/api/v1/teams/:id', async (request, response) => {
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on http://localhost:${app.get('port')}.`);
 });
+//Generates a message indicating that the port is indeed running

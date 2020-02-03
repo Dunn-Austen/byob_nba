@@ -4,15 +4,16 @@ const environment = process.env.NODE_ENV || 'development';
 const configuration = require('./knexfile')[environment];
 const database = require('knex')(configuration);
 
+app.use(express.json());
+
 app.set('port', process.env.PORT || 3000);
 app.locals.title = 'BYOB_NBA';
-//app.use(exp)
+
 
 app.get('/', (request, response) => {
   response.send('Welcome to the BYOB_NBA page');
 });
 
-//Get endpoint for all teams
 app.get('/api/v1/teams', async (request, response) => {
   try {
     const teams = await database('teams').select();
@@ -22,7 +23,6 @@ app.get('/api/v1/teams', async (request, response) => {
   }
 });
 
-//Get endpoint for a specific team
 app.get('/api/v1/teams/:id', async (request, response) => {
   try {
     const teams = await database('teams').where('id', request.params.id).select();
@@ -39,7 +39,6 @@ app.get('/api/v1/teams/:id', async (request, response) => {
   }
 });
 
-//Get endpoint for all champions
 app.get('/api/v1/champions', async (request, response) => {
   try {
     const champions = await database('champions').select();
@@ -49,7 +48,6 @@ app.get('/api/v1/champions', async (request, response) => {
   }
 });
 
-//Get endpoint for a specific champion
 app.get('/api/v1/champions/:id', async (request, response) => {
   try {
     const teams = await database('champions').where('id', request.params.id).select();
@@ -66,8 +64,6 @@ app.get('/api/v1/champions/:id', async (request, response) => {
   }
 });
 
-//Posting a new team
-// If POST request fails to save an entity due to bad information being sent from the client, you should respond with 422: Unprocessable entity
 app.post('/api/v1/teams', async (request, response) => {
   const team = request.body;
 
@@ -86,7 +82,6 @@ app.post('/api/v1/teams', async (request, response) => {
   }
 });
 
-//Posting a new champion
 app.post('/api/v1/champions', async (request, response) => {
   const champion = request.body;
 
@@ -105,7 +100,6 @@ app.post('/api/v1/champions', async (request, response) => {
   }
 });
 
-//Delete an NBA team
 app.delete('/api/v1/teams/:id', async (request, response) => {
   const { id } = request.params;
   try {

@@ -6,7 +6,7 @@
 - Knex
 
 **Project Summary**
-- BYOB NBA was a solo student project completed within one work as an introduction to coding in the backend, specifically with regard to fetch request endpoints. 
+- BYOB NBA was a solo student project completed within one week as an introduction to coding in the backend, specifically with regard to fetch request endpoints. 
 NBA team data was downloaded from https://www.basketball-reference.com/ and reformatted into a pet-sized API with two tables (relational database). One table included information on all modern NBA teams, the other included information on all NBA champions.
 
 **TeamsData Sample**
@@ -29,3 +29,6 @@ NBA team data was downloaded from https://www.basketball-reference.com/ and refo
 
 ---
 
+
+**Project Management Board**
+- https://github.com/Dunn-Austen/byob_nba/projects/1

@@ -11,14 +11,30 @@ app.get('/', (request, response) => {
   response.send('Welcome to the BYOB_NBA page');
 });
 
-app.get('/api/v1/teams/:id', (request, response) => {
-  const { id } = request.params;
-  const team = app.locals.teams.find(team => team.id === id);
-  if (!team) {
-    return response.sendStatus(404);
+//Get request for all teams
+app.get('/api/v1/teams', async (request, response) => {
+  try {
+    const teams = await database('teams').select();
+    response.status(200).json({teams});
+  } catch (error) {
+    response.status(500).json({error})
   }
+});
 
-  response.status(200).json(team);
+//Get request for a specific team - needs amendment for final lesson
+app.get('/api/v1/teams/:id', async (request, response) => {
+  try {
+    const { id } = request.params;
+    const teams = await database('teams').select();
+    const team = teams.find(team => team.id === id);
+    if (!team) {
+      return response.sendStatus(404);
+    }
+
+    response.status(200).json({team});
+  } catch (error) {
+    response.status(500).json({error})
+  }
 });
 
 app.listen(app.get('port'), () => {

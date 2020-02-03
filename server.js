@@ -25,7 +25,7 @@ app.get('/api/v1/teams', async (request, response) => {
 
 app.get('/api/v1/teams/:id', async (request, response) => {
   try {
-    const teams = await database('teams').where('id', request.params.id).select();
+    const team = await database('teams').where('id', request.params.id).select();
     if (team.length) {
       response.status(200).json({team});
 
@@ -50,7 +50,7 @@ app.get('/api/v1/champions', async (request, response) => {
 
 app.get('/api/v1/champions/:id', async (request, response) => {
   try {
-    const teams = await database('champions').where('id', request.params.id).select();
+    const champion = await database('champions').where('id', request.params.id).select();
     if (champion.length) {
       response.status(200).json({champion});
 
@@ -101,9 +101,8 @@ app.post('/api/v1/champions', async (request, response) => {
 });
 
 app.delete('/api/v1/teams/:id', async (request, response) => {
-  const { id } = request.params;
   try {
-    const team = await database('teams').where('id', id).del();
+    const team = await database('teams').where('id', request.params.id).del();
 
     response.sendStatus(204).json({msg: 'Successful delete'});
   } catch (error) {

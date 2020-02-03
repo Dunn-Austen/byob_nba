@@ -25,8 +25,4 @@ module.exports = {
     useNullAsDefault: true,
   },
 
-  ssl: {
-    rejectUnauthorized: false,
-  },
-
 };

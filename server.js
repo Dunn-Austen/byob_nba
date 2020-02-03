@@ -40,7 +40,7 @@ app.get('/api/v1/teams/:id', async (request, response) => {
 //Get endpoint for all champions
 app.get('/api/v1/champions', async (request, response) => {
   try {
-    const champions = await database('champions').select();
+    const champions = await database('teams').select();
     response.status(200).json({champions});
   } catch (error) {
     response.status(500).json({error})
@@ -51,7 +51,7 @@ app.get('/api/v1/champions', async (request, response) => {
 app.get('/api/v1/champions/:id', async (request, response) => {
   try {
     const { id } = request.params;
-    const champions = await database('champions').select();
+    const champions = await database('teams').select();
     const champion = champions.find(champion => champion.id === Number(id));
     if (!team) {
         return response.sendStatus(404);
@@ -97,7 +97,7 @@ app.post('/api/v1/champions', async (request, response) => {
   }
 
   try {
-    const id = await database('champions').insert(champion, 'id');
+    const id = await database('teams').insert(champion, 'id');
     response.status(201).json({ id: id[0] });
   } catch (error) {
     response.status(500).json({ error });

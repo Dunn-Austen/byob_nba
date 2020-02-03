@@ -452,4 +452,4 @@ let teamsData = [
 ];
 
 
-moduel.exports = teamsData;
+module.exports = teamsData;

@@ -1,16 +1,4 @@
-
-[
-  {
-    Year: "Year",
-    Lg: "Lg",
-    Franchise: "Champion",
-    Runner_up: "Runner-Up",
-    Mvp: "Finals Mvp",
-    "Top Performers": "Points",
-    "Top Performers__1": "Rebounds",
-    "Top Performers__2": "Assists",
-    "Top Performers__3": "Win Shares"
-  },
+let championsData = [
   {
     Year: 2019,
     Lg: "NBA",
@@ -758,8 +746,9 @@
     Franchise: "Minneapolis Lakers",
     Runner_up: "Syracuse Nationals",
     "Top Performers": "G. Mikan (376)",
-    "Top Performers__1": Year,
     "Top Performers__2": "J. Pollard (56)",
     "Top Performers__3": "G. Mikan (3.7)"
   }
-]
+];
+
+module.exports = championsData;
